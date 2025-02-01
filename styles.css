@@ -9,7 +9,7 @@ body {
 
 header {
   background: #4CAF50;
-  color: #fff;
+  color: #ff6b6b;
   padding: 40px 20px;
   text-align: center;
 }
@@ -95,5 +95,5 @@ footer {
   color: white;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 70%;
 }
