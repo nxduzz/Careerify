@@ -1,126 +1,63 @@
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Guidance</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Know More: Choose the Right Stream</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Career Guidance for Students</h1>
-    </header>
-    <nav>
-        <a href="#questions">Questions</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <div class="container">
-        {% block content %}{% endblock %}
+  <header>
+    <h1>Know More: Choose the Right Stream</h1>
+    <p>Your guide to selecting the best academic stream for your future.</p>
+  </header>
+
+  <section id="introduction">
+    <h2>Why Choosing the Right Stream Matters</h2>
+    <p>Your choice of stream after high school can shape your career and future. Let’s explore your options!</p>
+  </section>
+
+  <section id="streams">
+    <h2>Stream Options</h2>
+    <div class="stream-card">
+      <h3>Science</h3>
+      <p>Subjects: Physics, Chemistry, Biology/Mathematics</p>
+      <p>Career Paths: Engineering, Medicine, Research</p>
     </div>
-    <footer>
-        <p>&copy; 2025 Career Guidance</p>
-    </footer>
+    <div class="stream-card">
+      <h3>Commerce</h3>
+      <p>Subjects: Accountancy, Economics, Business Studies</p>
+      <p>Career Paths: CA, MBA, Finance</p>
+    </div>
+    <div class="stream-card">
+      <h3>Arts</h3>
+      <p>Subjects: History, Sociology, Literature</p>
+      <p>Career Paths: Journalism, Law, Design</p>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <h2>Which Stream is Right for You?</h2>
+    <p>Take this quick quiz to find out!</p>
+    <button id="quiz-button">Start Quiz</button>
+  </section>
+
+  <section id="faq">
+    <h2>FAQs</h2>
+    <div class="faq-item">
+      <h3>What if I’m unsure about my interests?</h3>
+      <p>Take a self-assessment test or consult a career counselor.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I switch streams later?</h3>
+      <p>Yes, but it may require additional effort and time.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2023 Know More. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
-{% extends "base.html" %}
-
-{% block content %}
-<section id="questions">
-    <h2>Explore Your Interests</h2>
-    <div class="question">
-        <img src="{{ url_for('static', filename='images/math.jpg') }}" alt="Math and Science">
-        <p>What subjects or activities do you naturally gravitate towards?</p>
-        <ul>
-            <li>a) Math and Science</li>
-            <li>b) Business and Economics</li>
-            <li>c) Arts and Culture</li>
-            <li>d) Humanities and Social Sciences</li>
-        </ul>
-    </div>
-    <div class="question">
-        <img src="{{ url_for('static', filename='images/problem_solving.jpg') }}" alt="Problem Solving">
-        <p>How do you feel about solving complex problems and equations?</p>
-        <ul>
-            <li>a) I enjoy it and feel motivated</li>
-            <li>b) It’s interesting, but a little challenging</li>
-            <li>c) I find it tough and frustrating</li>
-            <li>d) I prefer more theoretical or creative tasks</li>
-        </ul>
-    </div>
-    <div class="question">
-        <img src="{{ url_for('static', filename='images/biology.jpg') }}" alt="Biology">
-        <p>Do you enjoy understanding how the human body works or exploring life sciences?</p>
-        <ul>
-            <li>a) Yes, I love learning about biology and life sciences</li>
-            <li>b) I’m interested but not passionate about it</li>
-            <li>c) I prefer focusing on math or computer subjects</li>
-            <li>d) I’m more inclined toward non-scientific subjects</li>
-        </ul>
-    </div>
-    
-</section>
-<section id="contact">
-    <h2>Contact</h2>
-    <p>If you have any questions or need further guidance, feel free to reach out to us at <a href="mailto:careerguidance@example.com">careerguidance@example.com</a>.</p>
-</section>
-{% endblock %}
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-nav {
-    margin: 20px;
-    text-align: center;
-}
-nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #333;
-}
-nav a:hover {
-    color: #007BFF;
-}
-.container {
-    padding: 20px;
-}
-section {
-    margin-bottom: 20px;
-}
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
-.question {
-    margin-bottom: 20px;
-}
-.question img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin: 0 auto 10px;
-}
