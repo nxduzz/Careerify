@@ -21,7 +21,7 @@ header h1 {
 .animated-welcome {
     font-size: 3em;
     color: #333;
-    animation: fadeIn 3s ease-in-out infinite alternate;
+    animation: fadeIn 3s ease-in-out;
 }
 
 .italic-header {
