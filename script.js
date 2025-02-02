@@ -31,13 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizSection = document.getElementById("quiz");
   const quizButton = document.createElement("button");
   quizButton.textContent = "Start Quiz";
-  quizButton.style.marginTop = "20px";
-  quizButton.style.padding = "10px 20px";
-  quizButton.style.backgroundColor = "#4CAF50";
-  quizButton.style.color = "white";
-  quizButton.style.border = "none";
-  quizButton.style.borderRadius = "5px";
-  quizButton.style.cursor = "pointer";
+  quizButton.quiz.marginTop = "20px";
+  quizButton.quiz.padding = "10px 20px";
+  quizButton.quiz.backgroundColor = "#4CAF50";
+  quizButton.quiz.color = "white";
+  quizButton.quiz.border = "none";
+  quizButton.quiz.borderRadius = "5px";
+  quizButton.quiz.cursor = "pointer";
 
   quizButton.addEventListener("click", () => {
     alert("The quiz will start soon! Stay tuned.");
