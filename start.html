@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Selection Quiz</title>
+  
+<body>
+  <div class="quiz-container">
+    <h1>Which Stream Suits You Best?</h1>
+    <div id="quiz"></div>
+    <button id="submit-button" onclick="submitQuiz()">Next</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What subjects or activities do you naturally gravitate towards?",
+        visuals: "images/math_science_art_history_business.jpg",
+        options: [
+          { text: "Math and Science", stream: "ComputerScience" },
+          { text: "Business and Economics", stream: "Commerce" },
+          { text: "Arts and Culture", stream: "Humanities" },
+          { text: "Humanities and Social Sciences", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "How do you feel about solving complex problems and equations?",
+        visuals: "images/math_problems.jpg",
+        options: [
+          { text: "I enjoy it and feel motivated", stream: "ComputerScience" },
+          { text: "It’s interesting, but a little challenging", stream: "Commerce" },
+          { text: "I find it tough and frustrating", stream: "Humanities" },
+          { text: "I prefer more theoretical or creative tasks", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "Do you enjoy understanding how the human body works or exploring life sciences?",
+        visuals: "images/biology.jpg",
+        options: [
+          { text: "Yes, I love learning about biology and life sciences", stream: "BioScience" },
+          { text: "I’m interested but not passionate about it", stream: "Commerce" },
+          { text: "I prefer focusing on math or computer subjects", stream: "ComputerScience" },
+          { text: "I’m more inclined toward non-scientific subjects", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "Which of the following best describes your interest in technology?",
+        visuals: "images/computer.jpg",
+        options: [
+          { text: "I'm fascinated by technology, programming, and computing", stream: "ComputerScience" },
+          { text: "I'm interested in technology but prefer other areas more", stream: "BioScience" },
+          { text: "I find it complicated and prefer to avoid it", stream: "Commerce" },
+          { text: "I'm more interested in humanities and social issues", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "If you were asked to create a business plan for a startup, what part excites you the most?",
+        visuals: "images/business.jpg",
+        options: [
+          { text: "Calculating profits and managing finances", stream: "Commerce" },
+          { text: "Crafting a marketing strategy and reaching customers", stream: "Commerce" },
+          { text: "Managing operations and logistics", stream: "Commerce" },
+          { text: "I'm more interested in the creative side of things", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "Would you enjoy working in a lab setting, conducting experiments, and analyzing data?",
+        visuals: "images/biolab.jpg",
+        options: [
+          { text: "Yes, I love working hands-on with science experiments", stream: "BioScience" },
+          { text: "It's interesting, but I don't know if I'd enjoy it long-term", stream: "ComputerScience" },
+          { text: "I'd prefer a more office-based or creative job", stream: "Commerce" },
+          { text: "I'd rather focus on research in humanities or social sciences", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "How do you feel about studying literature, analyzing novels, or exploring human behavior?",
+        visuals: "images/book.jpg",
+        options: [
+          { text: "I enjoy reading and analyzing stories and human experiences", stream: "Humanities" },
+          { text: "I read occasionally but don't feel strongly about it", stream: "Commerce" },
+          { text: "I'd prefer practical subjects like math or technology", stream: "ComputerScience" },
+          { text: "I'm more interested in analyzing global issues or culture", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "Do you see yourself working in the healthcare sector like becoming a doctor or biotechnologist?",
+        visuals: "images/doctor.jpg",
+        options: [
+          { text: "Yes, I want to pursue a career in health and medicine", stream: "BioScience" },
+          { text: "I find it interesting but not my top choice", stream: "BioScience" },
+          { text: "I'm not interested in the medical field at all", stream: "Commerce" },
+          { text: "I prefer focusing on social science and history", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "Which type of environment would you prefer to work in?",
+        visuals: "images/environment.jpg",
+        options: [
+          { text: "A tech lab or office with gadgets and coding", stream: "ComputerScience" },
+          { text: "An office focused on business and financial discussions", stream: "Commerce" },
+          { text: "A creative studio for arts and design", stream: "Humanities" },
+          { text: "A museum or research center for social studies", stream: "Humanities" }
+        ]
+      },
+      {
+        question: "How much do you enjoy using your creativity in your work or projects?",
+        visuals: "images/painting.jpg",
+        options: [
+          { text: "I enjoy being creative and coming up with unique ideas", stream: "Humanities" },
+          { text: "I like being creative but also enjoy logical work", stream: "ComputerScience" },
+          { text: "Creativity is not my main strength, I prefer structured work", stream: "BioScience" },
+          { text: "I enjoy creative expression but prefer in-depth research in social sciences", stream: "Humanities" }
+        ]
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = { BioScience: 0, ComputerScience: 0, Commerce: 0, Humanities: 0 };
+
+    function loadQuestion() {
+      const quizElement = document.getElementById('quiz');
+      const questionData = quizData[currentQuestion];
+      quizElement.innerHTML = `
+        <div class="question">
+          <h3>${questionData.question}</h3>
+          <div class="visual">
+            <img src="${questionData.visuals}" alt="Visual for question">
+          </div>
+          <div class="options">
+            ${questionData.options.map((option, index) => `
+              <label>
+                <input type="radio" name="option" value="${option.stream}" data-index="${index}">
+                ${option.text}
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      // Update button text and color
+      const submitButton = document.getElementById('submit-button');
+      if (currentQuestion < quizData.length - 1) {
+        submitButton.textContent = "Next";
+        submitButton.className = "next";
+      } else {
+        submitButton.textContent = "Submit";
+        submitButton.className = "submit";
+      }
+    }
+
+    function submitQuiz() {
+      const selectedOption = document.querySelector('input[name="option"]:checked');
+      if (selectedOption) {
+        const selectedStream = selectedOption.value;
+        score[selectedStream]++;
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuestion();
+        } else {
+          showResult();
+        }
+      } else {
+        alert("Please select an option!");
+      }
+    }
+
+    function showResult() {
+      const maxScoreStream = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+      // Redirect to the result page with the selected stream as a URL parameter
+      window.location.href = result.html?stream=${maxScoreStream};
+    }
+
+    // Load the first question
+    loadQuestion();
+  </script>
+</body>
+</html>
