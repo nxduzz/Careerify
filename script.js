@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   quizButton.quiz.cursor = "pointer";
 
   quizButton.addEventListener("click", () => {
-    window.location.href = "quiz.html"; 
+    window.location.href = "index.html","result.html" 
   });
 
   quizSection.appendChild(quizButton);
