@@ -48,8 +48,8 @@ const resultText = document.getElementById("result-text");
 
 // Start Quiz
 startQuizButton.addEventListener("click", () => {
-    startQuizButton.style.display = "none";
-    quizContainer.style.display = "block";
+    startQuizButton.quiz.display = "none";
+    quizContainer.quiz.display = "block";
     loadQuestion();
 });
 
