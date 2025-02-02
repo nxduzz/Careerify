@@ -1,0 +1,32 @@
+#quiz-container {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#options-container label {
+    display: block;
+    margin: 10px 0;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
