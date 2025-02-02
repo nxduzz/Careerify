@@ -1,84 +1,52 @@
-
-    {
-        question: "On a scale of 1 to 5, how much do you enjoy solving problems?",
-        options: [
-            { label: "1", value: "humanities" },
-            { label: "2", value: "arts" },
-            { label: "3", value: "biomaths" },
-            { label: "4", value: "computer_science" },
-            { label: "5", value: "computer_science" }
-        ]
-    }
-];
-
-// Variables
-let currentQuestionIndex = 0;
-let userResponses = [];
-const quizContainer = document.getElementById("quiz-container");
-const questionText = document.getElementById("question-text");
-const optionsContainer = document.getElementById("options-container");
-const nextButton = document.getElementById("next-question");
-const startQuizButton = document.getElementById("start-quiz");
-const resultsDiv = document.getElementById("results");
-const resultText = document.getElementById("result-text");
-
-// Start Quiz
-startQuizButton.addEventListener("click", () => {
-    startQuizButton.quiz.display = "none";
-    quizContainer.quiz.display = "block";
-    loadQuestion();
-});
-
-// Load Question
-function loadQuestion() {
-    const currentQuestion = quizData[currentQuestionIndex];
-    questionText.textContent = currentQuestion.question;
-    optionsContainer.innerHTML = "";
-
-    currentQuestion.options.forEach((option, index) => {
-        const optionElement = document.createElement("label");
-        optionElement.innerHTML = `
-            <input type="radio" name="option" value="${option.value}" required>
-            ${option.label}
-        `;
-        optionsContainer.appendChild(optionElement);
+// Wait for the DOM to fully load
+document.addEventListener("DOMContentLoaded", () => {
+  // Smooth Scrolling for Anchor Links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href").substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     });
+  });
 
-    nextButton.disabled = true;
-}
-
-// Handle Option Selection
-optionsContainer.addEventListener("change", () => {
-    nextButton.disabled = false;
-});
-
-// Next Question
-nextButton.addEventListener("click", () => {
-    const selectedOption = document.querySelector('input[name="option"]:checked');
-    if (selectedOption) {
-        userResponses.push(selectedOption.value);
-        currentQuestionIndex++;
-
-        if (currentQuestionIndex < quizData.length) {
-            loadQuestion();
-        } else {
-            showResults();
-        }
-    }
-});
-
-// Show Results
-function showResults() {
-    quizContainer.style.display = "none";
-    resultsDiv.style.display = "block";
-
-    // Calculate scores
-    const scores = {};
-    userResponses.forEach(response => {
-        scores[response] = (scores[response] || 0) + 1;
+  // FAQ Toggle Functionality
+  document.querySelectorAll(".faq-item h6, .faq-item h7, .faq-item h8").forEach(header => {
+    header.addEventListener("click", () => {
+      const content = header.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
     });
+  });
 
-    // Determine the recommended stream
-    const recommendedStream = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
-    resultText.textContent = `${recommendedStream.charAt(0).toUpperCase() + recommendedStream.slice(1)}`;
-}
+  // Quiz Button Click Event
+  const quizSection = document.getElementById("quiz");
+  const quizButton = document.createElement("button");
+  quizButton.textContent = "Start Quiz";
+  quizButton.style.marginTop = "20px";
+  quizButton.style.padding = "10px 20px";
+  quizButton.style.backgroundColor = "#4CAF50";
+  quizButton.style.color = "white";
+  quizButton.style.border = "none";
+  quizButton.style.borderRadius = "5px";
+  quizButton.style.cursor = "pointer";
+
+  quizButton.addEventListener("click", () => {
+    alert("The quiz will start soon! Stay tuned.");
+  });
+
+  quizSection.appendChild(quizButton);
+
+  // Footer Year Update
+  const footerYear = document.querySelector("footer p");
+  const currentYear = new Date().getFullYear();
+  footerYear.textContent = footerYear.textContent.replace("2025", currentYear);
+});
